@@ -17,14 +17,14 @@ const routes = [
             },
             {
                 path: 'profile',
-                name: 'categories',
-                component: () => import('./views/Categories')
+                name: 'video',
+                component: () => import('./views/Videos')
             }
             ,
             {
                 path: '/video/:id',
                 name: 'detail',
-                component: () => import('./views/DetailCategories'),
+                component: () => import('./views/DetailVideos'),
                 props: true
             }
         ],

@@ -27,25 +27,25 @@ Route::group(['prefix' => 'auth'], function() {
     });
     
 });
-Route::group(['prefix' => 'user'], function() {
-    Route::group(['middleware'=>'auth:api'], function() {
-        Route::post('edit-category', function() {
-            return response()->json([
-                'message' => 'Admin access'
-                ,'status_code' => 200
-            ]);
-        })->middleware('scope:do_anything');
+// Route::group(['prefix' => 'user'], function() {
+//     Route::group(['middleware'=>'auth:api'], function() {
+//         Route::post('edit-category', function() {
+//             return response()->json([
+//                 'message' => 'Admin access'
+//                 ,'status_code' => 200
+//             ]);
+//         })->middleware('scope:do_anything');
 
-        Route::post('create-category', function() {
-            return response()->json([
-                'message' => 'Everyone access'
-                ,'status_code' => 200
-            ]);
-        })->middleware('scope:do_anything,can_create');
-    });
-});
+//         Route::post('create-category', function() {
+//             return response()->json([
+//                 'message' => 'Everyone access'
+//                 ,'status_code' => 200
+//             ]);
+//         })->middleware('scope:do_anything,can_create');
+//     });
+// });
 
-Route::resource('categories','CategoryController');
+Route::resource('videos','VideoController');
 // $token = $user->createToken('My Token', ['place-orders'])->accessToken;
 
-Route::get('profile/{id}','CategoryController@profile');
+Route::get('profile/{id}','VideoController@profile');

@@ -11,7 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_category_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/category_service */ "./resources/js/services/category_service.js");
+/* harmony import */ var _services_video_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/video_service */ "./resources/js/services/video_service.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -40,15 +40,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      categories: []
+      videos: []
     };
   },
   mounted: function mounted() {
-    this.loadCategory();
+    this.loadVideo();
   },
   methods: {
-    loadCategory: function () {
-      var _loadCategory = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    loadVideo: function () {
+      var _loadVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -56,12 +56,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _services_category_service__WEBPACK_IMPORTED_MODULE_1__["loadCategory"]();
+                return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["loadVideo"]();
 
               case 3:
                 response = _context.sent;
                 // console.log(response);
-                this.categories = response.data.data; // console.log(this.categories);
+                this.videos = response.data.data; // console.log(this.videos);
 
                 _context.next = 10;
                 break;
@@ -83,11 +83,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this, [[0, 7]]);
       }));
 
-      function loadCategory() {
-        return _loadCategory.apply(this, arguments);
+      function loadVideo() {
+        return _loadVideo.apply(this, arguments);
       }
 
-      return loadCategory;
+      return loadVideo;
     }()
   }
 });
@@ -115,32 +115,26 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.categories, function(category, index) {
+      _vm._l(_vm.videos, function(video, index) {
         return _c(
           "div",
           { key: index, staticClass: "col-md-3" },
           [
             _c(
               "router-link",
-              {
-                attrs: { to: { name: "detail", params: { id: category.id } } }
-              },
+              { attrs: { to: { name: "detail", params: { id: video.id } } } },
               [
                 _c("img", {
                   staticClass: "img-responsive",
                   staticStyle: { width: "200px" },
                   attrs: {
                     src:
-                      _vm.$store.state.serverPath +
-                      "/storage/" +
-                      category.image,
-                    alt: category.name
+                      _vm.$store.state.serverPath + "/storage/" + video.image,
+                    alt: video.name
                   }
                 }),
                 _vm._v(" "),
-                _c("span", { staticClass: "btn" }, [
-                  _vm._v(_vm._s(category.name))
-                ])
+                _c("span", { staticClass: "btn" }, [_vm._v(_vm._s(video.name))])
               ]
             )
           ],
@@ -158,46 +152,45 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/services/category_service.js":
-/*!***************************************************!*\
-  !*** ./resources/js/services/category_service.js ***!
-  \***************************************************/
-/*! exports provided: createCategory, loadCategory, loadCategoryProfile, deleteCategory, updateCategory, loadMore, getDetail */
+/***/ "./resources/js/services/video_service.js":
+/*!************************************************!*\
+  !*** ./resources/js/services/video_service.js ***!
+  \************************************************/
+/*! exports provided: createVideo, loadVideo, loadVideoProfile, deleteVideo, updateVideo, loadMore, getDetail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCategory", function() { return createCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadCategory", function() { return loadCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadCategoryProfile", function() { return loadCategoryProfile; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCategory", function() { return deleteCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCategory", function() { return updateCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideo", function() { return loadVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideoProfile", function() { return loadVideoProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMore", function() { return loadMore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDetail", function() { return getDetail; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
-function createCategory(data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post('/categories', data);
+function createVideo(data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post('/videos', data);
 }
-function loadCategory() {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/categories');
+function loadVideo() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/videos');
 }
-function loadCategoryProfile(id) {
+function loadVideoProfile(id) {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/profile/".concat(id));
 }
-function deleteCategory(id) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/categories/".concat(id));
+function deleteVideo(id) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/videos/".concat(id));
 }
-function updateCategory(id, data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post("categories/".concat(id), data);
+function updateVideo(id, data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post("videos/".concat(id), data);
 }
 function loadMore(nextPage) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("categories?page=".concat(nextPage));
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("videos?page=".concat(nextPage));
 }
 function getDetail(id) {
-  // GET|HEAD  | api/categories/{category}      | categories.show
   console.log(id);
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/categories/".concat(id));
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/videos/".concat(id));
 }
 
 /***/ }),
