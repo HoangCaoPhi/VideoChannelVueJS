@@ -1,0 +1,73 @@
+<template>
+  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <router-link to="/" class="navbar-brand" exact>
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Video Channel</span>
+      </router-link>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left Side Of Navbar -->
+        <ul class="navbar-nav mr-auto">
+          <form class="form-inline" action method="GET">
+            <input
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="Search"
+              name="video_search"
+            />
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </ul>
+
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Authentication Links -->
+        </ul>
+        <span>{{ $store.state.profile.name }}</span>
+        <ul class="navbar-nav ml-auto ml-md-0">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="userDropdown"
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user fa-fw"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <router-link to="/profile" class="dropdown-item">
+                <span>Profile</span>
+              </router-link>
+              <button type="submit" class="dropdown-item" v-on:click="logout">Logout</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+import * as auth from "../services/auth_service";
+export default {
+  methods: {
+    logout: async function() {
+      auth.logout();
+      this.$router.push("/login");
+    }
+  }
+};
+</script>
