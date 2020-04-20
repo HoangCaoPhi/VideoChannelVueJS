@@ -5,6 +5,7 @@ import * as auth from './services/auth_service';
 
 var host = window.location.hostname;
 var port = window.location.port;
+console.log(host);
 
 Vue.use(VueX);
 export default new VueX.Store({
