@@ -12,8 +12,8 @@ Vue.use(VueX);
 export default new VueX.Store({
     state: {
         isLoggedIn: null,
-        apiUrl: protocol +'://'+  host + ':' + port + '/api',
-        serverPath: protocol +'://'+ host + ':' + port,
+        apiUrl: 'http://' + host + ':' + port + '/api',
+        serverPath: 'http://' + host + ':' + port,
         profile: {},
     },
     mutations: {
