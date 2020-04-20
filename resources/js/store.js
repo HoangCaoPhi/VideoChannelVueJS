@@ -3,18 +3,21 @@ import Vue from 'vue';
 import VueX from 'vuex';
 import * as auth from './services/auth_service';
 
+var host = window.location.hostname;
+var port = window.location.port;
+
 Vue.use(VueX);
 export default new VueX.Store({
-    state:{
+    state: {
         isLoggedIn: null,
-        apiUrl: 'http://localhost:8000/api',
-        serverPath: 'http://localhost:8000',
+        apiUrl: 'http://' + host + ':' + port + '/api',
+        serverPath: 'http://' + host + ':' + port,
         profile: {},
     },
-    mutations:{
+    mutations: {
         authenticate(state, payload) {
             state.isLoggedIn = auth.isLoggedIn();
-            if(state.isLoggedIn) {
+            if (state.isLoggedIn) {
                 state.profile = payload;
             }
             else {

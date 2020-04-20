@@ -69,6 +69,7 @@
           <div class="invalid-feedback" v-if="errors.name">{{ errors.name[0] }}</div>
         </div>
         <div class="form-group">
+           <label for="image">Enter Image Video</label>
           <div v-if="Data.image.name">
             <img src ref="newVideoImageDisplay" class="w-150px" />
           </div>
@@ -82,6 +83,7 @@
           <div class="invalid-feedback" v-if="errors.image">{{ errors.image[0] }}</div>
         </div>
         <div class="form-group">
+           <label for="video">Enter Video</label>
           <input
             type="file"
             v-on:change="attachImage"

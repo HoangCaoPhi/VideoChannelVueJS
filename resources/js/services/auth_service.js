@@ -45,5 +45,6 @@ export function getAccessToken() {
 
     const tokenData = jwt.decode(token);
   // console.log(tokenData.user.access_token);
+  
     return tokenData.user.access_token;
 }
