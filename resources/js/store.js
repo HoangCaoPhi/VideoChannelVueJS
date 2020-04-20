@@ -5,14 +5,15 @@ import * as auth from './services/auth_service';
 
 var host = window.location.hostname;
 var port = window.location.port;
+var protocol = window.location.protocol;
 console.log(host);
 
 Vue.use(VueX);
 export default new VueX.Store({
     state: {
         isLoggedIn: null,
-        apiUrl: 'https://' + host + ':' + port + '/api',
-        serverPath: 'https://' + host + ':' + port,
+        apiUrl: protocol +'://'+  host + ':' + port + '/api',
+        serverPath: protocol +'://'+ host + ':' + port,
         profile: {},
     },
     mutations: {

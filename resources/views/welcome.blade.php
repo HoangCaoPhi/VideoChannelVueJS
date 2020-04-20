@@ -11,10 +11,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
-         <link rel="stylesheet" href="{{ secure_asset ('css/app.css') }}">
+         <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
     </head>
     <body>
         <div id="app"></div>
-        <script src="{{ secure_asset ('js/app.js') }}"></script>
+        <script src="{{ secure_asset('js/app.js') }}"></script>
     </body>
 </html>
