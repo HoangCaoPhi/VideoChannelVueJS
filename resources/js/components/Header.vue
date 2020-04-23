@@ -15,6 +15,7 @@
         <i class="fas fa-tachometer-alt"></i>
         <span>Video Channel</span>
       </router-link>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
@@ -32,19 +33,19 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
           <!-- Authentication Links -->
-          <li class="nav-item">
+          <li class="nav-item" v-if="$store.state.isLoggedIn !== true">
             <router-link to="/login" class="dropdown-item">
-              <span>Login</span>
+              <span><i class="fas fa-user-plus"></i>  Login</span>
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="$store.state.isLoggedIn !== true">
             <router-link to="/register" class="dropdown-item">
-              <span>Register</span>
+              <span><i class="fas fa-sign-in-alt"></i>  Register</span>     
             </router-link>
           </li>
         </ul>
         <span>{{ $store.state.profile.name }}</span>
-        <ul class="navbar-nav ml-auto ml-md-0">
+        <ul class="navbar-nav ml-auto ml-md-0" v-if="$store.state.isLoggedIn == true">
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -72,12 +73,23 @@
 
 <script>
 import * as auth from "../services/auth_service";
+import store from "../store";
 export default {
+  data() {
+    return {
+        loginState: true
+    }
+  },
   methods: {
     logout: async function() {
       auth.logout();
       this.$router.push("/login");
+      store.state.isLoggedIn = false;
+       store.state.profile.name = "";
     }
+  },
+  mounted() {
+
   }
 };
 </script>
