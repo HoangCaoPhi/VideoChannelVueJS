@@ -7,27 +7,9 @@ Vue.use(Router);
 
 const routes = [
     {
-        path: '/',
-        component: Home,
-        children: [
-            {
-                path: '',
-                name: 'dashboard',
-                component: () => import('./views/Dashboard')
-            },
-            {
-                path: 'profile',
-                name: 'video',
-                component: () => import('./views/Videos')
-            }
-            ,
-            {
-                path: '/video/:id',
-                name: 'detail',
-                component: () => import('./views/DetailVideos'),
-                props: true
-            }
-        ],
+        path: '/profile',
+        name: 'video',
+        component: () => import('./views/Videos'),
         beforeEnter(to, from, next) {
             if (!auth.isLoggedIn()) {
                 next('/login');
@@ -36,6 +18,17 @@ const routes = [
                 next();
             }
         }
+    },
+    {
+        path: '/',
+        name: 'dashboard',
+        component: () => import('./views/Dashboard')
+    },
+    {
+        path: '/video/:id',
+        name: 'detail',
+        component: () => import('./views/DetailVideos'),
+        props: true
     },
     {
         path: '/register',

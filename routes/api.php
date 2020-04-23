@@ -27,25 +27,25 @@ Route::group(['prefix' => 'auth'], function() {
     });
     
 });
-// Route::group(['prefix' => 'user'], function() {
-//     Route::group(['middleware'=>'auth:api'], function() {
-//         Route::post('edit-category', function() {
-//             return response()->json([
-//                 'message' => 'Admin access'
-//                 ,'status_code' => 200
-//             ]);
-//         })->middleware('scope:do_anything');
-
-//         Route::post('create-category', function() {
-//             return response()->json([
-//                 'message' => 'Everyone access'
-//                 ,'status_code' => 200
-//             ]);
-//         })->middleware('scope:do_anything,can_create');
-//     });
-// });
+Route::group(['prefix' => 'user', 'middleware'=>'auth:api'], function() {
+    Route::group(['middleware'=>'scope:user'], function() {
+        Route::get('/user-scope', function() {
+            return response()->json([
+                'message' => 'User access'
+                ,'status_code' => 200
+            ]);
+        });
+    });
+    Route::group(['middleware'=>'scope:administrator'], function() {
+        Route::get('/admin-scope', function() {
+            return response()->json([
+                'message' => 'Amin access'
+                ,'status_code' => 200
+            ]);
+        });
+    });
+});
 
 Route::resource('videos','VideoController');
-// $token = $user->createToken('My Token', ['place-orders'])->accessToken;
 
 Route::get('profile/{id}','VideoController@profile');

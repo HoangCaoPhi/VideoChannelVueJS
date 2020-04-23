@@ -32,6 +32,16 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
           <!-- Authentication Links -->
+          <li class="nav-item">
+            <router-link to="/login" class="dropdown-item">
+              <span>Login</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/register" class="dropdown-item">
+              <span>Register</span>
+            </router-link>
+          </li>
         </ul>
         <span>{{ $store.state.profile.name }}</span>
         <ul class="navbar-nav ml-auto ml-md-0">

@@ -34,6 +34,7 @@ class AuthController extends Controller
             ], 500);
         }
     }
+    
     public function login(Request $request) {
         $request->validate([
             'email' => 'required|string|email',
@@ -50,10 +51,10 @@ class AuthController extends Controller
 
         $user = $request->user();
         if($user->role == 'administrator') {
-            $tokenData = $user->createToken('Personal Access Token', ['do_anything']);
+            $tokenData = $user->createToken('Personal Access Token', ['administrator']);
         }
         else {
-            $tokenData = $user->createToken('Personal Access Token', ['can_create']);
+            $tokenData = $user->createToken('Personal Access Token', ['user']);
         }
 
         $token = $tokenData->token;
