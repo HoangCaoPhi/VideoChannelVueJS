@@ -163,16 +163,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -690,8 +680,11 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "image" } }, [
-                  _vm._v("Enter Image Video")
+                  _c("span", [_c("i", { staticClass: "fas fa-images" })]),
+                  _vm._v("  Enter Image")
                 ]),
+                _vm._v(" "),
+                _c("br"),
                 _vm._v(" "),
                 _vm.Data.image.name
                   ? _c("div", [
@@ -705,7 +698,6 @@ var render = function() {
                 _vm._v(" "),
                 _c("input", {
                   ref: "newVideoImage",
-                  staticClass: "form-control",
                   attrs: { type: "file", id: "image" },
                   on: { change: _vm.attachImage }
                 }),
@@ -719,12 +711,14 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "video" } }, [
-                  _vm._v("Enter Video")
+                  _c("span", [_c("i", { staticClass: "fas fa-file-video" })]),
+                  _vm._v("  Enter Video")
                 ]),
+                _vm._v(" "),
+                _c("br"),
                 _vm._v(" "),
                 _c("input", {
                   ref: "newVideoVideo",
-                  staticClass: "form-control",
                   attrs: { type: "file", id: "video" },
                   on: { change: _vm.attachImage }
                 }),
@@ -824,9 +818,10 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
                 _c("input", {
                   ref: "editVideoImage",
-                  staticClass: "form-control",
                   attrs: { type: "file", id: "image" },
                   on: { change: _vm.editAttachImage }
                 }),

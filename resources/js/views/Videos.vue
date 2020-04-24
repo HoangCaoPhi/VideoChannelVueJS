@@ -69,28 +69,18 @@
           <div class="invalid-feedback" v-if="errors.name">{{ errors.name[0] }}</div>
         </div>
         <div class="form-group">
-           <label for="image">Enter Image Video</label>
+          <label for="image"><span><i class="fas fa-images"></i></span>  Enter Image</label>
+          <br />
           <div v-if="Data.image.name">
             <img src ref="newVideoImageDisplay" class="w-150px" />
           </div>
-          <input
-            type="file"
-            v-on:change="attachImage"
-            ref="newVideoImage"
-            class="form-control"
-            id="image"
-          />
+          <input type="file" v-on:change="attachImage" ref="newVideoImage" id="image" />
           <div class="invalid-feedback" v-if="errors.image">{{ errors.image[0] }}</div>
         </div>
         <div class="form-group">
-           <label for="video">Enter Video</label>
-          <input
-            type="file"
-            v-on:change="attachImage"
-            ref="newVideoVideo"
-            class="form-control"
-            id="video"
-          />
+          <label for="video"><span> <i class="fas fa-file-video"></i></span>  Enter Video</label>
+          <br />
+          <input type="file" v-on:change="attachImage" ref="newVideoVideo" id="video" />
           <div class="invalid-feedback" v-if="errors.video">{{ errors.video[0] }}</div>
         </div>
         <hr />
@@ -123,11 +113,11 @@
               class="w-150px"
             />
           </div>
+          <br>
           <input
             type="file"
             v-on:change="editAttachImage"
             ref="editVideoImage"
-            class="form-control"
             id="image"
           />
           <div class="invalid-feedback" v-if="errors.image">{{ errors.image[0] }}</div>

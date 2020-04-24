@@ -36,6 +36,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -121,21 +140,79 @@ var render = function() {
           { key: index, staticClass: "col-md-3" },
           [
             _c(
-              "router-link",
-              { attrs: { to: { name: "detail", params: { id: video.id } } } },
+              "b-card-group",
+              { attrs: { deck: "" } },
               [
-                _c("img", {
-                  staticClass: "img-responsive",
-                  staticStyle: { width: "200px" },
-                  attrs: {
-                    src:
-                      _vm.$store.state.serverPath + "/storage/" + video.image,
-                    alt: video.name
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "btn" }, [_vm._v(_vm._s(video.name))])
-              ]
+                _c(
+                  "b-card",
+                  {
+                    attrs: {
+                      "img-src":
+                        _vm.$store.state.serverPath + "/storage/" + video.image,
+                      "img-alt": "Image",
+                      "img-top": "",
+                      "img-height": "150px"
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "footer",
+                          fn: function() {
+                            return [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _vm._v("Uploaop")
+                              ])
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _c(
+                      "b-row",
+                      { attrs: { "no-gutters": "" } },
+                      [
+                        _c(
+                          "b-col",
+                          { attrs: { md: "6" } },
+                          [
+                            _c("b-card-img", {
+                              staticClass: "rounded-circle",
+                              staticStyle: { width: "50px", height: "50px" },
+                              attrs: {
+                                src: "https://picsum.photos/400/400/?image=20",
+                                alt: "Image"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-col",
+                          { attrs: { md: "6" } },
+                          [_c("b-card-text", [_vm._v(_vm._s(video.name))])],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("router-link", {
+                      staticClass: "stretched-link",
+                      attrs: {
+                        to: { name: "detail", params: { id: video.id } }
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
             )
           ],
           1

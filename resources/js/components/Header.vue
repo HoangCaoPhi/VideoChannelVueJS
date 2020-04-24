@@ -12,22 +12,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <router-link to="/" class="navbar-brand" exact>
-        <i class="fas fa-tachometer-alt"></i>
+        <i class="fab fa-youtube" style=" color: red !important;"></i>
         <span>Video Channel</span>
       </router-link>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
-          <form class="form-inline" action method="GET">
-            <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              name="video_search"
-            />
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
+          <Search></Search>
         </ul>
 
         <!-- Right Side Of Navbar -->
@@ -35,12 +27,16 @@
           <!-- Authentication Links -->
           <li class="nav-item" v-if="$store.state.isLoggedIn !== true">
             <router-link to="/login" class="dropdown-item">
-              <span><i class="fas fa-user-plus"></i>  Login</span>
+              <span>
+                <i class="fas fa-user-plus"></i> Login
+              </span>
             </router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isLoggedIn !== true">
             <router-link to="/register" class="dropdown-item">
-              <span><i class="fas fa-sign-in-alt"></i>  Register</span>     
+              <span>
+                <i class="fas fa-sign-in-alt"></i> Register
+              </span>
             </router-link>
           </li>
         </ul>
@@ -73,23 +69,25 @@
 
 <script>
 import * as auth from "../services/auth_service";
+import Search from "../components/Search";
 import store from "../store";
 export default {
   data() {
     return {
-        loginState: true
-    }
+      loginState: true
+    };
+  },
+  components: {
+    Search
   },
   methods: {
     logout: async function() {
       auth.logout();
       this.$router.push("/login");
       store.state.isLoggedIn = false;
-       store.state.profile.name = "";
+      store.state.profile.name = "";
     }
   },
-  mounted() {
-
-  }
+  mounted() {}
 };
 </script>

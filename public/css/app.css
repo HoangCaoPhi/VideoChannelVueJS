@@ -10899,6 +10899,10 @@ a .nav-link.active {
   width: 150px;
 }
 
+.h-200px {
+  height: 200px;
+}
+
 .invalid-feedback {
   display: inline-block;
 }
