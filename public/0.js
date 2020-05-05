@@ -80,13 +80,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
                 // console.log(response);
-                this.videos = response.data.data; // console.log(this.videos);
-
-                _context.next = 10;
+                this.videos = response.data;
+                console.log(this.videos);
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 this.flashMessage.error({
                   title: "Error Message Title",
@@ -94,12 +94,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   time: 5000
                 });
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       function loadVideo() {
@@ -159,8 +159,10 @@ var render = function() {
                           key: "footer",
                           fn: function() {
                             return [
-                              _c("small", { staticClass: "text-muted" }, [
-                                _vm._v("Uploaop")
+                              _c("b", { staticClass: "text-muted" }, [
+                                _vm._v(
+                                  "Upload by " + _vm._s(video.user.name) + " "
+                                )
                               ])
                             ]
                           },
@@ -226,49 +228,6 @@ var staticRenderFns = []
 render._withStripped = true
 
 
-
-/***/ }),
-
-/***/ "./resources/js/services/video_service.js":
-/*!************************************************!*\
-  !*** ./resources/js/services/video_service.js ***!
-  \************************************************/
-/*! exports provided: createVideo, loadVideo, loadVideoProfile, deleteVideo, updateVideo, loadMore, getDetail */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideo", function() { return loadVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideoProfile", function() { return loadVideoProfile; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMore", function() { return loadMore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDetail", function() { return getDetail; });
-/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
-
-function createVideo(data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post('/videos', data);
-}
-function loadVideo() {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/videos');
-}
-function loadVideoProfile(id) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/profile/".concat(id));
-}
-function deleteVideo(id) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/videos/".concat(id));
-}
-function updateVideo(id, data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post("videos/".concat(id), data);
-}
-function loadMore(nextPage) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("videos?page=".concat(nextPage));
-}
-function getDetail(id) {
-  console.log(id);
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/videos/".concat(id));
-}
 
 /***/ }),
 

@@ -29,3 +29,7 @@ export function getDetail(id) {
     console.log(id);
     return http().get(`/videos/${id}`);
 }
+
+export function getSearchVideo(data) {
+    return http().post(`/search`, data);
+}

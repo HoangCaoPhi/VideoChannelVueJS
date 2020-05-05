@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,8 @@ class VideoController extends Controller
     public function index()
     {
         //
-        $videos = Video::orderBy('created_at','desc')->paginate(8);
+        // $videos = Video::orderBy('created_at','desc')->paginate(8);
+        $videos = Video::with('user')->get();
         return response()->json($videos, 200);
     }
 
@@ -165,5 +167,20 @@ class VideoController extends Controller
     public function profile($id) {
         $videos = Video::where('user_id',$id)->get();
         return response()->json($videos, 200);
+    }
+
+    public function search(Request $request) {
+        $nameVideo = $request->name;
+        $videoSearch = Video::where('name', 'LIKE', "%$nameVideo%")->get();
+        if($videoSearch != "[]") {
+            return response()->json($videoSearch);
+        }
+        else {
+            return response()->json([
+                'message' => 'Not Found Video !!',
+                'status_code' => 404
+            ], 404);
+        }
+       
     }
 }

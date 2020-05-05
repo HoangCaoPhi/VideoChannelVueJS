@@ -37,9 +37,9 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth:api'], function() {
         });
     });
     Route::group(['middleware'=>'scope:administrator'], function() {
-        Route::get('/admin-scope', function() {
+        Route::get('/admin', function() {
             return response()->json([
-                'message' => 'Amin access'
+                'message' => 'Admin access'
                 ,'status_code' => 200
             ]);
         });
@@ -49,3 +49,5 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth:api'], function() {
 Route::resource('videos','VideoController');
 
 Route::get('profile/{id}','VideoController@profile');
+
+Route::post('/search', 'VideoController@search');

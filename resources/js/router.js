@@ -31,6 +31,12 @@ const routes = [
         props: true
     },
     {
+        path: '/search/:nameSearch',
+        name: 'search',
+        component:() => import('./views/VideoSearch'),
+        props: true
+    },
+    {
         path: '/register',
         name: 'register',
         component: () => import('./views/authentication/Register')

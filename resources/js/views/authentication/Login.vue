@@ -90,9 +90,14 @@ export default {
     login: async function login() {
       try {
         const response = await auth.login(this.user);
-        // console.log(response);
+         console.log(response.token_scope);
         this.errors = {};
-        this.$router.push("/");
+        if(response.token_scope === 'user') {
+           this.$router.push("/");
+        }
+        else {
+           this.$router.push("/admin");
+        }
       } catch (error) {
         switch (error.response.status) {
           case 422:

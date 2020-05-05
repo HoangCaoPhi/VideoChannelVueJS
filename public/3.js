@@ -119,45 +119,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                // console.log(response);
+                console.log(response.token_scope);
                 this.errors = {};
-                this.$router.push("/");
-                _context.next = 19;
+
+                if (response.token_scope === 'user') {
+                  this.$router.push("/");
+                } else {
+                  this.$router.push("/admin");
+                }
+
+                _context.next = 20;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 13 : _context.t1 === 401 ? 15 : 17;
+                _context.next = _context.t1 === 422 ? 14 : _context.t1 === 401 ? 16 : 18;
                 break;
 
-              case 13:
+              case 14:
                 this.errors = _context.t0.response.data.errors;
-                return _context.abrupt("break", 19);
+                return _context.abrupt("break", 20);
 
-              case 15:
+              case 16:
                 this.flashMessage.error({
                   title: "Error Message Title",
                   message: _context.t0.response.data.message,
                   time: 5000
                 });
-                return _context.abrupt("break", 19);
+                return _context.abrupt("break", 20);
 
-              case 17:
+              case 18:
                 this.flashMessage.error({
                   title: "Error Message Title",
                   message: "Some Error Occurred, Please Try Again!",
                   time: 5000
                 });
-                return _context.abrupt("break", 19);
+                return _context.abrupt("break", 20);
 
-              case 19:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       function login() {

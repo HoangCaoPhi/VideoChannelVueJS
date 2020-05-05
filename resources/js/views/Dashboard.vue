@@ -25,9 +25,9 @@
               </b-col>
             </b-row>
 
-            <router-link :to="{name:'detail', params:{id: video.id}}" class="stretched-link"></router-link>
+          <router-link :to="{name:'detail', params:{id: video.id}}" class="stretched-link"></router-link>
            <template v-slot:footer>
-                <small class="text-muted">Uploaop</small>
+                <b class="text-muted">Upload by {{ video.user.name }} </b>
             </template>
           </b-card>
         </b-card-group>
@@ -51,8 +51,9 @@ export default {
       try {
         const response = await videoService.loadVideo();
         // console.log(response);
-        this.videos = response.data.data;
-        // console.log(this.videos);
+        this.videos = response.data;
+        
+         console.log(this.videos);
       } catch (error) {
         this.flashMessage.error({
           title: "Error Message Title",

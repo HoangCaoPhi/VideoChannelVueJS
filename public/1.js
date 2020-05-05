@@ -141,49 +141,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/services/video_service.js":
-/*!************************************************!*\
-  !*** ./resources/js/services/video_service.js ***!
-  \************************************************/
-/*! exports provided: createVideo, loadVideo, loadVideoProfile, deleteVideo, updateVideo, loadMore, getDetail */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideo", function() { return loadVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadVideoProfile", function() { return loadVideoProfile; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMore", function() { return loadMore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDetail", function() { return getDetail; });
-/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
-
-function createVideo(data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post('/videos', data);
-}
-function loadVideo() {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/videos');
-}
-function loadVideoProfile(id) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/profile/".concat(id));
-}
-function deleteVideo(id) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/videos/".concat(id));
-}
-function updateVideo(id, data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post("videos/".concat(id), data);
-}
-function loadMore(nextPage) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("videos?page=".concat(nextPage));
-}
-function getDetail(id) {
-  console.log(id);
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get("/videos/".concat(id));
-}
-
-/***/ }),
-
 /***/ "./resources/js/views/DetailVideos.vue":
 /*!*********************************************!*\
   !*** ./resources/js/views/DetailVideos.vue ***!
