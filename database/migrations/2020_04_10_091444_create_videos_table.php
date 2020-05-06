@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateVideosTable extends Migration
 {
@@ -20,7 +21,10 @@ class CreateVideosTable extends Migration
             $table->text('video');
             $table->integer('user_id');
             $table->timestamps();
+            DB::statement('ALTER TABLE videos ADD FULLTEXT `search`(`name`)');
+            DB::statement('ALTER TABLE videos ENGINE = MyISAM');
         });
+        
     }
 
     /**

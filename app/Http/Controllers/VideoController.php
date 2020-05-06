@@ -170,8 +170,7 @@ class VideoController extends Controller
     }
 
     public function search(Request $request) {
-        $nameVideo = $request->name;
-        $videoSearch = Video::where('name', 'LIKE', "%$nameVideo%")->get();
+        $videoSearch = Video::search($request->name)->get();
         if($videoSearch != "[]") {
             return response()->json($videoSearch);
         }
@@ -181,6 +180,5 @@ class VideoController extends Controller
                 'status_code' => 404
             ], 404);
         }
-       
     }
 }

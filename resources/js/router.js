@@ -9,7 +9,7 @@ const routes = [
     {
         path: '/profile',
         name: 'video',
-        component: () => import('./views/Videos'),
+        component: () => import('./views/video/Videos'),
         beforeEnter(to, from, next) {
             if (!auth.isLoggedIn()) {
                 next('/login');
@@ -27,13 +27,13 @@ const routes = [
     {
         path: '/video/:id',
         name: 'detail',
-        component: () => import('./views/DetailVideos'),
+        component: () => import('./views/video/DetailVideos'),
         props: true
     },
     {
         path: '/search/:nameSearch',
         name: 'search',
-        component:() => import('./views/VideoSearch'),
+        component:() => import('./views/video/VideoSearch'),
         props: true
     },
     {

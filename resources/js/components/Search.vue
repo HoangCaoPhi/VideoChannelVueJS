@@ -16,7 +16,7 @@
 
 <script>
 import * as videoService from "../services/video_service";
-import videoSearch from "../views/VideoSearch";
+import videoSearch from "../views/video/VideoSearch";
 
 export default {
   name: "search",
