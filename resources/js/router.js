@@ -4,6 +4,8 @@ import Home from './views/Home.vue';
 import * as auth from './services/auth_service';
 
 Vue.use(Router);
+const UserProfile = { template: '<div>Profile</div>' }
+const UserPosts = { template: '<div>Posts</div>' }
 
 const routes = [
     {
@@ -22,7 +24,48 @@ const routes = [
     {
         path: '/',
         name: 'dashboard',
-        component: () => import('./views/Dashboard')
+        component: () => import('./views/Dashboard'),
+
+        beforeEnter(to, from, next) {
+            if (auth.checkUser() === 'user') {
+                next();
+            }
+            else {
+                next('/admin');
+            }
+        }
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('./admin/HomeAdmin'),
+        children: [
+            {
+                path: '',
+                name: 'home',
+                component: () => import('./admin/Dashboard')
+            },
+            {
+                path: 'videos',
+                name: 'videos',
+                component: () => import('./admin/videos/Video')
+            }
+            ,
+            {
+                path: 'users',
+                name: 'users',
+                component: () => import('./admin/users/User')
+            },
+        ],
+        beforeEnter(to, from, next) {
+            if (auth.checkUser() === 'user') {
+                next('/');
+            }
+            else if (auth.checkUser() === 'administrator') {
+                next();
+            }
+
+        }
     },
     {
         path: '/video/:id',
@@ -33,7 +76,7 @@ const routes = [
     {
         path: '/search/:nameSearch',
         name: 'search',
-        component:() => import('./views/video/VideoSearch'),
+        component: () => import('./views/video/VideoSearch'),
         props: true
     },
     {

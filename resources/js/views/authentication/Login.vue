@@ -90,8 +90,9 @@ export default {
     login: async function login() {
       try {
         const response = await auth.login(this.user);
-         console.log(response.token_scope);
+        console.log(response.token_scope);
         this.errors = {};
+        
         if(response.token_scope === 'user') {
            this.$router.push("/");
         }

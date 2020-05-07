@@ -6,20 +6,20 @@
 </template>
 
 <script>
-import * as auth from './services/auth_service';
+import * as auth from "./services/auth_service";
 import Home from "../js/views/Home";
 export default {
-  name: 'App',
+  name: "App",
   components: { Home },
-  beforeCreate: async function()  {
+  beforeCreate: async function() {
     try {
-        if(auth.isLoggedIn()) {
-          const response = await auth.getProfile();
-          this.$store.dispatch('authenticate', response.data);
-        }
+      if (auth.isLoggedIn()) {
+        const response = await auth.getProfile();
+        this.$store.dispatch("authenticate", response.data);
+      }
     } catch (error) {
-          auth.logout();
+      auth.logout();
     }
   }
-}
+};
 </script>
