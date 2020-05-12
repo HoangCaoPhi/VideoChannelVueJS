@@ -170,7 +170,8 @@ class VideoController extends Controller
     }
 
     public function search(Request $request) {
-        $videoSearch = Video::search($request->name)->get();
+        $filters = 'checkView = 1';
+        $videoSearch = Video::search($request->name)->where('checkView', '1')->get();
         if($videoSearch != "[]") {
             return response()->json($videoSearch);
         }

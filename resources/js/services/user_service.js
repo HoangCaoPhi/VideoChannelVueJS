@@ -7,3 +7,7 @@ export function userScope(data) {
 export function adminScope(data) {
     return http().get('/user/admin');
 }
+
+export function getUser() {
+    return http().get('/users');
+}

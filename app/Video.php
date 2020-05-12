@@ -14,13 +14,22 @@ class Video extends Model
     }
     public function searchableAs()
     {
-       return 'name';
+        return 'name';
     }
  
+    public function isChecked()
+    {
+        return $this->checkView !== 0;
+    }
+     
+    public function shouldBeSearchable()
+    {
+        return $this->isChecked();
+    }
+    
     public function toSearchableArray()
     {
        $array = $this->toArray();
-    //    $array['video'] = $this->video['name'];
        return $array;
     }
 }

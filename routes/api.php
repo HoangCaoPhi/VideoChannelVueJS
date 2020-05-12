@@ -46,6 +46,8 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth:api'], function() {
     });
 });
 
+Route::resource('users','UserController');
+
 Route::resource('videos','VideoController');
 
 Route::get('profile/{id}','VideoController@profile');

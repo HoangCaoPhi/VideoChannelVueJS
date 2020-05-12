@@ -21,6 +21,7 @@ class CreateVideosTable extends Migration
             $table->text('video');
             $table->integer('user_id');
             $table->timestamps();
+            $table->text('checkView');
             DB::statement('ALTER TABLE videos ADD FULLTEXT `search`(`name`)');
             DB::statement('ALTER TABLE videos ENGINE = MyISAM');
         });
