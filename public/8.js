@@ -71,6 +71,32 @@ var render = function() {
             ])
           ]
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-6 col-md-6 mb-4" }, [
+        _c(
+          "div",
+          { staticClass: "card border-left-success shadow h-100 py-2" },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "div",
+                { staticClass: "row no-gutters align-items-center" },
+                [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("router-link", {
+                    staticClass: "stretched-link",
+                    attrs: { to: "/admin/categories" }
+                  })
+                ],
+                1
+              )
+            ])
+          ]
+        )
       ])
     ])
   ])
@@ -121,6 +147,31 @@ var staticRenderFns = [
             "text-xs font-weight-bold text-success text-uppercase mb-1"
         },
         [_vm._v("QUẢN LÝ VIDEO")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "h5 mb-0 font-weight-bold text-gray-800" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-auto" }, [
+      _c("i", { staticClass: "fas fa-video fa-2x text-gray-300" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col mr-2" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "text-xs font-weight-bold text-danger text-uppercase mb-1"
+        },
+        [_vm._v("QUẢN LÝ CATEGORY")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "h5 mb-0 font-weight-bold text-gray-800" })

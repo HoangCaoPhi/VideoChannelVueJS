@@ -50,6 +50,8 @@ Route::resource('users','UserController');
 
 Route::resource('videos','VideoController');
 
+Route::resource('categories','CategoryController');
+
 Route::get('profile/{id}','VideoController@profile');
 
 Route::post('/search', 'VideoController@search');
