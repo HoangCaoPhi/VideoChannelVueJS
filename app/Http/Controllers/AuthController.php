@@ -13,14 +13,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email',
-            'password' => 'required|string|confirmed'
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email',
+            'password'  => 'required|string|confirmed'
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user           = new User();
+        $user->name     = $request->name;
+        $user->email    = $request->email;
         $user->password = bcrypt($request->password);
 
         if ($user->save()) {
@@ -37,17 +37,19 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+            'email'     => 'required|string|email',
+            'password'  => 'required|string',
             // 'remember_me' => 'boolean'
         ]);
-
+        
+        // Kiem tra tai khoan mat khau
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json([
                 'message' => 'Invalid username/password', 'status_code' => 401
             ], 401);
         }
 
+        // Tao token
         $user = $request->user();
         if ($user->role == 'administrator') {
             $tokenData = $user->createToken('Personal Access Token', ['administrator']);
@@ -63,7 +65,7 @@ class AuthController extends Controller
 
         if ($token->save()) {
             return response()->json([
-                'user' => $user,
+                'user'         => $user,
                 'access_token' => $tokenData->accessToken,
                 'token_type'   => 'Bearer',
                 'token_scope'  => $tokenData->token->scopes[0],

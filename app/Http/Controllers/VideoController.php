@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use App\User;
+use App\Category;
+use App\Video_Category;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,8 +19,6 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
-        // $videos = Video::orderBy('created_at','desc')->paginate(8);
         $videos = Video::with('user')->get();
         return response()->json($videos, 200);
     }
@@ -40,34 +41,44 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $request->validate([
-            'name'=> 'required|min:3',
-            'image'=> 'required|image|mimes:jpg,png,jpeg',
-            'video'  => 'required|mimetypes:video/avi,video/mpeg,video/mp4'
+            'name'       => 'required|min:3',
+            'image'      => 'required|image|mimes:jpg,png,jpeg',
+            'video'      => 'required|mimetypes:video/avi,video/mpeg,video/mp4',
+            'categories' => 'required'
         ]);
 
-        $videos = new Video();
-        $videos->name = $request->name;
-        $image_path = $request->file('image')->store('video_images');
-        $video_path = $request->file('video')->store('video_videos');
-        $videos->image = $image_path;
-        $videos->video = $video_path;
+        $videos          = new Video();
+
+        $videos->name    = $request->name;
+
+        $image_path      = $request->file('image')->store('video_images');
+        $video_path      = $request->file('video')->store('video_videos');
+        $videos->image   = $image_path;
+        $videos->video   = $video_path;
+
         $videos->user_id = $request->user_id;
 
-        if ($videos->save()) 
-        {
+        $categories      = $request->categories;
+        $arr             = explode(",", $categories);
+
+        if ($videos->save()) {
+            foreach ($arr as $cate) {
+                $category              = new Video_Category();
+                $category->category_id = $cate;
+                $category->video_id    = $videos->id;
+                $category->save();
+            }
             return response()->json($videos, 200);
-        }
-        else 
-        {
+        } else {
             return response()->json([
                 'message' => 'Some error occurred!!',
                 'status_code' => 500
             ], 500);
         }
-        dd($request->all());
-        
+        // dd($request->all());
+
     }
 
     /**
@@ -102,38 +113,34 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-  
+
         $request->validate([
-            'name'=> 'required|min:3',
+            'name' => 'required|min:3',
         ]);
 
         $video->name = $request->name;
-        $oldPath = $video->image;
+        $oldPath     = $video->image;
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $request->validate([
-                'image'=> 'required|image|mimes:jpg,png,jpeg'
+                'image' => 'required|image|mimes:jpg,png,jpeg'
             ]);
-            $path = $request->file('image')->store('categories_images');
+            $path         = $request->file('image')->store('categories_images');
             $video->image = $path;
 
             Storage::delete($oldPath);
         }
 
-        if ($video->save()) 
-        {
+        if ($video->save()) {
             return response()->json($video, 200);
-        }
-        else 
-        {
-            
+        } else {
+
             Storage::delete($path);
             return response()->json([
                 'message' => 'Some error occurred!!',
                 'status_code' => 500
             ], 500);
         }
-        
     }
 
     /**
@@ -146,17 +153,14 @@ class VideoController extends Controller
     {
         //
         // dd($video);
-        if($video->delete())
-        {
+        if ($video->delete()) {
             Storage::delete($video->image);
 
             return response()->json([
                 'message' => 'Video deleted successful !!',
                 'status_code' => 200
             ], 200);
-        }
-        else
-        {
+        } else {
             return response()->json([
                 'message' => 'Some error occurred!!',
                 'status_code' => 500
@@ -164,18 +168,19 @@ class VideoController extends Controller
         }
     }
 
-    public function profile($id) {
-        $videos = Video::where('user_id',$id)->get();
+    public function profile($id)
+    {
+        $videos = Video::where('user_id', $id)->get();
         return response()->json($videos, 200);
     }
 
-    public function search(Request $request) {
-  
+    public function search(Request $request)
+    {
+
         $videoSearch = Video::search($request->name)->get();
-        if($videoSearch != "[]") {
+        if ($videoSearch != "[]") {
             return response()->json($videoSearch);
-        }
-        else {
+        } else {
             return response()->json([
                 'message' => 'Not Found Video !!',
                 'status_code' => 404

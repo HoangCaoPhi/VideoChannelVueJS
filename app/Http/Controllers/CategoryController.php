@@ -16,10 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        $categories  =    Category::find(1);
-        $video       =   $categories->videos;
-        return response()->json($video);
+        $categories  =    Category::all();
+        return response()->json($categories);
     }
 
     /**

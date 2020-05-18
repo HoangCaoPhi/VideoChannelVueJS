@@ -12,6 +12,7 @@
         </span> Thêm người dùng
       </b-button>
     </div>
+
     <div class="row">
       <div class="col-sm-12">
         <table
@@ -25,52 +26,12 @@
         >
           <thead>
             <tr role="row">
-              <th
-                class="sorting_asc"
-                tabindex="0"
-                aria-controls="dataTable"
-                rowspan="1"
-                colspan="1"
-                aria-sort="ascending"
-                aria-label="Name: activate to sort column descending"
-                style="width: 58px;"
-              >Tên</th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="dataTable"
-                rowspan="1"
-                colspan="1"
-                aria-label="Position: activate to sort column ascending"
-                style="width: 63px;"
-              >Email</th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="dataTable"
-                rowspan="1"
-                colspan="1"
-                aria-label="Office: activate to sort column ascending"
-                style="width: 50px;"
-              >Số video</th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="dataTable"
-                rowspan="1"
-                colspan="1"
-                aria-label="Age: activate to sort column ascending"
-                style="width: 31px;"
-              >Quản lý video</th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="dataTable"
-                rowspan="1"
-                colspan="1"
-                aria-label="Salary: activate to sort column ascending"
-                style="width: 67px;"
-              >Xóa người dùng</th>
+              <th style="width: 58px;">Tên</th>
+              <th style="width: 63px;">Email</th>
+              <th style="width: 50px;">Số video</th>
+              <th style="width: 50px;">Quan ly danh muc</th>
+              <th style="width: 31px;">Quản lý video</th>
+              <th style="width: 67px;">Xóa người dùng</th>
             </tr>
           </thead>
           <tbody>
@@ -78,6 +39,9 @@
               <td class="sorting_1">{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.videos.length }}</td>
+              <td>
+                <p v-for="(category, index) in user.categories" :key="index">{{ category.name }}</p>
+              </td>
               <td>
                 <button class="btn btn-primary">
                   <span>
@@ -97,6 +61,7 @@
         </table>
       </div>
     </div>
+
     <b-modal ref="newUser" title="Add New Video" hide-footer>
       <form v-on:submit.prevent="createUser">
         <div class="form-group">
@@ -116,6 +81,7 @@
 <script>
 import * as userService from "../../services/user_service";
 import * as store from "../../store";
+
 export default {
   data() {
     return {
@@ -125,9 +91,9 @@ export default {
   methods: {
     loadUser: async function() {
       try {
-        const response = await userService.getUser();
-        this.users = response.data;
-        console.log(response);
+        const response  = await userService.getUser();
+        this.users      = response.data;
+       // console.log(response);
       } catch (error) {}
     },
     hideNewVideoModal() {

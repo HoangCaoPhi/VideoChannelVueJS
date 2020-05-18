@@ -69,7 +69,11 @@
           <div class="invalid-feedback" v-if="errors.name">{{ errors.name[0] }}</div>
         </div>
         <div class="form-group">
-          <label for="image"><span><i class="fas fa-images"></i></span>  Enter Image</label>
+          <label for="image">
+            <span>
+              <i class="fas fa-images"></i>
+            </span> Enter Image
+          </label>
           <br />
           <div v-if="Data.image.name">
             <img src ref="newVideoImageDisplay" class="w-150px" />
@@ -78,12 +82,25 @@
           <div class="invalid-feedback" v-if="errors.image">{{ errors.image[0] }}</div>
         </div>
         <div class="form-group">
-          <label for="video"><span> <i class="fas fa-file-video"></i></span>  Enter Video</label>
+          <label for="video">
+            <span>
+              <i class="fas fa-file-video"></i>
+            </span> Enter Video
+          </label>
           <br />
           <input type="file" v-on:change="attachImage" ref="newVideoVideo" id="video" />
           <div class="invalid-feedback" v-if="errors.video">{{ errors.video[0] }}</div>
         </div>
-        <hr />
+
+        <div class="form-group">
+          <label for="sel1">Select Category:</label>
+          <span v-for="(category, index) in categories" :key="index">
+            <input type="checkbox" v-model="checkedNames" v-bind:value="category.id"/>
+            <label>{{ category.name }} &nbsp;</label>
+          </span>
+        </div>
+        <span>Checked names: {{ checkedNames }}</span>
+   
         <div class="text-right">
           <button type="button" class="btn btn-danger" v-on:click="hideNewVideoModal">Cancel</button>
           <button type="submit" class="btn btn-success">
@@ -113,13 +130,8 @@
               class="w-150px"
             />
           </div>
-          <br>
-          <input
-            type="file"
-            v-on:change="editAttachImage"
-            ref="editVideoImage"
-            id="image"
-          />
+          <br />
+          <input type="file" v-on:change="editAttachImage" ref="editVideoImage" id="image" />
           <div class="invalid-feedback" v-if="errors.image">{{ errors.image[0] }}</div>
         </div>
         <hr />
@@ -143,11 +155,13 @@ export default {
   data() {
     return {
       videos: [],
+      categories: [],
       Data: {
         name: "",
         image: "",
         video: ""
       },
+      checkedNames: [],
       moreExist: false,
       nextPage: 0,
       editVideoData: {
@@ -159,8 +173,16 @@ export default {
   },
   mounted() {
     this.loadVideoProfile();
+    this.loadCategories();
   },
   methods: {
+    loadCategories: async function() {
+      try {
+        const response = await videoService.loadCategories();
+        this.categories = response.data;
+        console.log(this.categories);
+      } catch (error) {}
+    },
     loadVideoProfile: async function() {
       try {
         const response = await videoService.loadVideoProfile(
@@ -225,7 +247,9 @@ export default {
       formData.append("name", this.Data.name);
       formData.append("image", this.Data.image);
       formData.append("video", this.Data.video);
+      formData.append("categories", this.checkedNames);
       formData.append("user_id", this.$store.state.profile.id);
+
       try {
         const response = await videoService.createVideo(formData);
         this.videos.unshift(response.data);
@@ -266,7 +290,7 @@ export default {
         });
 
         this.loadVideo();
-        
+
         this.flashMessage.success({
           message: "Delete Video Successed !!",
           time: 5000

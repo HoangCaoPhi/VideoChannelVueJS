@@ -163,17 +163,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       videos: [],
+      categories: [],
       Data: {
         name: "",
         image: "",
         video: ""
       },
+      checkedNames: [],
       moreExist: false,
       nextPage: 0,
       editVideoData: {
@@ -185,10 +199,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.loadVideoProfile();
+    this.loadCategories();
   },
   methods: {
-    loadVideoProfile: function () {
-      var _loadVideoProfile = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    loadCategories: function () {
+      var _loadCategories = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -196,19 +211,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["loadVideoProfile"](this.$store.state.profile.id);
+                return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["loadCategories"]();
 
               case 3:
                 response = _context.sent;
-                // console.log(response);
-                this.videos = response.data;
-                console.log(this.videos);
-                _context.next = 11;
+                this.categories = response.data;
+                console.log(this.categories);
+                _context.next = 10;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 8]]);
+      }));
+
+      function loadCategories() {
+        return _loadCategories.apply(this, arguments);
+      }
+
+      return loadCategories;
+    }(),
+    loadVideoProfile: function () {
+      var _loadVideoProfile = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["loadVideoProfile"](this.$store.state.profile.id);
+
+              case 3:
+                response = _context2.sent;
+                // console.log(response);
+                this.videos = response.data;
+                console.log(this.videos);
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
                 this.flashMessage.error({
                   title: "Error Message Title",
                   message: "Some Error Occurred, Please Try Again!",
@@ -217,10 +268,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       function loadVideoProfile() {
@@ -261,23 +312,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs["newVideo"].show();
     },
     createVideo: function () {
-      var _createVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var _createVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 formData = new FormData();
                 formData.append("name", this.Data.name);
                 formData.append("image", this.Data.image);
                 formData.append("video", this.Data.video);
+                formData.append("categories", this.checkedNames);
                 formData.append("user_id", this.$store.state.profile.id);
-                _context2.prev = 5;
-                _context2.next = 8;
+                _context3.prev = 6;
+                _context3.next = 9;
                 return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["createVideo"](formData);
 
-              case 8:
-                response = _context2.sent;
+              case 9:
+                response = _context3.sent;
                 this.videos.unshift(response.data);
                 this.hideNewVideoModal();
                 this.flashMessage.success({
@@ -288,34 +340,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   name: "",
                   image: ""
                 };
-                _context2.next = 24;
+                _context3.next = 25;
                 break;
 
-              case 15:
-                _context2.prev = 15;
-                _context2.t0 = _context2["catch"](5);
-                _context2.t1 = _context2.t0.response.status;
-                _context2.next = _context2.t1 === 422 ? 20 : 22;
+              case 16:
+                _context3.prev = 16;
+                _context3.t0 = _context3["catch"](6);
+                _context3.t1 = _context3.t0.response.status;
+                _context3.next = _context3.t1 === 422 ? 21 : 23;
                 break;
 
-              case 20:
-                this.errors = _context2.t0.response.data.errors;
-                return _context2.abrupt("break", 24);
+              case 21:
+                this.errors = _context3.t0.response.data.errors;
+                return _context3.abrupt("break", 25);
 
-              case 22:
+              case 23:
                 this.flashMessage.error({
                   title: "Error Message Title",
                   message: "Some Error Occurred, Please Try Again!",
                   time: 5000
                 });
-                return _context2.abrupt("break", 24);
+                return _context3.abrupt("break", 25);
 
-              case 24:
+              case 25:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[5, 15]]);
+        }, _callee3, this, [[6, 16]]);
       }));
 
       function createVideo() {
@@ -325,21 +377,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return createVideo;
     }(),
     deleteVideo: function () {
-      var _deleteVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(video) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      var _deleteVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(video) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 if (window.confirm("Are you sure you want to delete ".concat(video.name, " ?"))) {
-                  _context3.next = 2;
+                  _context4.next = 2;
                   break;
                 }
 
-                return _context3.abrupt("return");
+                return _context4.abrupt("return");
 
               case 2:
-                _context3.prev = 2;
-                _context3.next = 5;
+                _context4.prev = 2;
+                _context4.next = 5;
                 return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["deleteVideo"](video.id);
 
               case 5:
@@ -351,24 +403,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   message: "Delete Video Successed !!",
                   time: 5000
                 });
-                _context3.next = 13;
+                _context4.next = 13;
                 break;
 
               case 10:
-                _context3.prev = 10;
-                _context3.t0 = _context3["catch"](2);
+                _context4.prev = 10;
+                _context4.t0 = _context4["catch"](2);
                 this.flashMessage.error({
                   title: "Error Message Title",
-                  message: _context3.t0.response.data.message,
+                  message: _context4.t0.response.data.message,
                   time: 5000
                 });
 
               case 13:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[2, 10]]);
+        }, _callee4, this, [[2, 10]]);
       }));
 
       function deleteVideo(_x) {
@@ -382,22 +434,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editVideoModal();
     },
     updateVideo: function () {
-      var _updateVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var _updateVideo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.prev = 0;
+                _context5.prev = 0;
                 formData = new FormData();
                 formData.append("name", this.editVideoData.name);
                 formData.append("image", this.editVideoData.image);
                 formData.append("_method", "put");
-                _context4.next = 7;
+                _context5.next = 7;
                 return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["updateVideo"](this.editVideoData.id, formData);
 
               case 7:
-                response = _context4.sent;
+                response = _context5.sent;
                 this.videos.map(function (video) {
                   if (video.id == response.data.id) {
                     // video = response.data;
@@ -411,24 +463,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   message: "Update Video Successed !!",
                   time: 5000
                 });
-                _context4.next = 16;
+                _context5.next = 16;
                 break;
 
               case 13:
-                _context4.prev = 13;
-                _context4.t0 = _context4["catch"](0);
+                _context5.prev = 13;
+                _context5.t0 = _context5["catch"](0);
                 this.flashMessage.error({
                   title: "Error Message Title",
-                  message: _context4.t0.response.data.message,
+                  message: _context5.t0.response.data.message,
                   time: 5000
                 });
 
               case 16:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this, [[0, 13]]);
+        }, _callee5, this, [[0, 13]]);
       }));
 
       function updateVideo() {
@@ -438,20 +490,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return updateVideo;
     }(),
     loadMore: function () {
-      var _loadMore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      var _loadMore = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
         var _this = this;
 
         var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
+                _context6.prev = 0;
+                _context6.next = 3;
                 return _services_video_service__WEBPACK_IMPORTED_MODULE_1__["loadMore"](this.nextPage);
 
               case 3:
-                response = _context5.sent;
+                response = _context6.sent;
 
                 if (response.current_page < response.data.last_page) {
                   this.moreExist = true;
@@ -463,12 +515,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response.data.data.forEach(function (data) {
                   _this.videos.push(data);
                 });
-                _context5.next = 11;
+                _context6.next = 11;
                 break;
 
               case 8:
-                _context5.prev = 8;
-                _context5.t0 = _context5["catch"](0);
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](0);
                 this.flashMessage.error({
                   title: "Error Message Title",
                   message: "Some Error Occurred",
@@ -477,10 +529,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 11:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this, [[0, 8]]);
+        }, _callee6, this, [[0, 8]]);
       }));
 
       function loadMore() {
@@ -681,7 +733,7 @@ var render = function() {
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "image" } }, [
                   _c("span", [_c("i", { staticClass: "fas fa-images" })]),
-                  _vm._v("  Enter Image")
+                  _vm._v(" Enter Image\n        ")
                 ]),
                 _vm._v(" "),
                 _c("br"),
@@ -712,7 +764,7 @@ var render = function() {
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "video" } }, [
                   _c("span", [_c("i", { staticClass: "fas fa-file-video" })]),
-                  _vm._v("  Enter Video")
+                  _vm._v(" Enter Video\n        ")
                 ]),
                 _vm._v(" "),
                 _c("br"),
@@ -730,7 +782,66 @@ var render = function() {
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _c("hr"),
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", { attrs: { for: "sel1" } }, [
+                    _vm._v("Select Category:")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(category, index) {
+                    return _c("span", { key: index }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.checkedNames,
+                            expression: "checkedNames"
+                          }
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          value: category.id,
+                          checked: Array.isArray(_vm.checkedNames)
+                            ? _vm._i(_vm.checkedNames, category.id) > -1
+                            : _vm.checkedNames
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.checkedNames,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = category.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  (_vm.checkedNames = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.checkedNames = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.checkedNames = $$c
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", [_vm._v(_vm._s(category.name) + "  ")])
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("Checked names: " + _vm._s(_vm.checkedNames))
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "text-right" }, [
                 _c(

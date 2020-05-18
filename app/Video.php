@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
- 
+
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -16,27 +16,27 @@ class Video extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'video-category', 'category_id');
+        return $this->belongsToMany('App\Category', 'video__categories', 'video_id');
     }
-    
+
     public function searchableAs()
     {
         return 'name';
     }
- 
-    public function isChecked()
-    {
-        return $this->checkView !== 0;
-    }
-     
-    public function shouldBeSearchable()
-    {
-        return $this->isChecked();
-    }
-    
+
+    // public function isChecked()
+    // {
+    //     return $this->checkView !== 0;
+    // }
+
+    // public function shouldBeSearchable()
+    // {
+    //     return $this->isChecked();
+    // }
+
     public function toSearchableArray()
     {
-       $array = $this->toArray();
-       return $array;
+        $array = $this->toArray();
+        return $array;
     }
 }

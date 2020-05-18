@@ -99,41 +99,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -266,6 +231,16 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.videos.length))]),
                       _vm._v(" "),
+                      _c(
+                        "td",
+                        _vm._l(user.categories, function(category, index) {
+                          return _c("p", { key: index }, [
+                            _vm._v(_vm._s(category.name))
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
                       _vm._m(2, true),
                       _vm._v(" "),
                       _c("td", [
@@ -363,86 +338,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { attrs: { role: "row" } }, [
-        _c(
-          "th",
-          {
-            staticClass: "sorting_asc",
-            staticStyle: { width: "58px" },
-            attrs: {
-              tabindex: "0",
-              "aria-controls": "dataTable",
-              rowspan: "1",
-              colspan: "1",
-              "aria-sort": "ascending",
-              "aria-label": "Name: activate to sort column descending"
-            }
-          },
-          [_vm._v("Tên")]
-        ),
+        _c("th", { staticStyle: { width: "58px" } }, [_vm._v("Tên")]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "sorting",
-            staticStyle: { width: "63px" },
-            attrs: {
-              tabindex: "0",
-              "aria-controls": "dataTable",
-              rowspan: "1",
-              colspan: "1",
-              "aria-label": "Position: activate to sort column ascending"
-            }
-          },
-          [_vm._v("Email")]
-        ),
+        _c("th", { staticStyle: { width: "63px" } }, [_vm._v("Email")]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "sorting",
-            staticStyle: { width: "50px" },
-            attrs: {
-              tabindex: "0",
-              "aria-controls": "dataTable",
-              rowspan: "1",
-              colspan: "1",
-              "aria-label": "Office: activate to sort column ascending"
-            }
-          },
-          [_vm._v("Số video")]
-        ),
+        _c("th", { staticStyle: { width: "50px" } }, [_vm._v("Số video")]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "sorting",
-            staticStyle: { width: "31px" },
-            attrs: {
-              tabindex: "0",
-              "aria-controls": "dataTable",
-              rowspan: "1",
-              colspan: "1",
-              "aria-label": "Age: activate to sort column ascending"
-            }
-          },
-          [_vm._v("Quản lý video")]
-        ),
+        _c("th", { staticStyle: { width: "50px" } }, [
+          _vm._v("Quan ly danh muc")
+        ]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "sorting",
-            staticStyle: { width: "67px" },
-            attrs: {
-              tabindex: "0",
-              "aria-controls": "dataTable",
-              rowspan: "1",
-              colspan: "1",
-              "aria-label": "Salary: activate to sort column ascending"
-            }
-          },
-          [_vm._v("Xóa người dùng")]
-        )
+        _c("th", { staticStyle: { width: "31px" } }, [_vm._v("Quản lý video")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "67px" } }, [_vm._v("Xóa người dùng")])
       ])
     ])
   },

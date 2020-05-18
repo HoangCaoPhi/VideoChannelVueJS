@@ -26,9 +26,10 @@
                   <td>Action</td>
                 </tr>
               </thead>
+
               <tbody>
                 <tr v-for="(video, index) in videos" :key="index">
-                  <td>{{index + 1 }}</td>
+                  <td>{{ index + 1 }}</td>
                   <td>{{ video.name }}</td>
                   <td>
                     <img
@@ -166,7 +167,7 @@ export default {
   methods: {
     loadVideoProfile: async function() {
       try {
-            const response = await videoService.loadVideo();
+        const response = await videoService.loadVideo();
         // console.log(response);
         this.videos = response.data;
         console.log(this.videos);

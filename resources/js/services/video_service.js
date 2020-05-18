@@ -33,3 +33,7 @@ export function getDetail(id) {
 export function getSearchVideo(data) {
     return http().post(`/search`, data);
 }
+
+export function loadCategories() {
+    return http().get('/categories');
+}

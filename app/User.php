@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Video');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category', 'user__categories', 'user_id');
+    }
 }
